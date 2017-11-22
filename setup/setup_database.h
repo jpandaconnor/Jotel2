@@ -23,6 +23,11 @@ private:
     Ui::Setup_Database *ui;
 
     void closeEvent(QCloseEvent* event);
+
+    void validateInput();
+
+    void greyIn();
+    void greyOut();
 };
 
 #endif // SETUP_DATABASE_H

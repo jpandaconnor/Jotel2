@@ -62,6 +62,10 @@ Jotel::Jotel(QWidget *parent) :
     database.open();
 }
 
+void Jotel::connect_database() {
+
+}
+
 Jotel::~Jotel()
 {
     delete ui;
