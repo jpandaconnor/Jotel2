@@ -15,8 +15,14 @@ public:
     explicit Setup_Database(QWidget *parent = 0);
     ~Setup_Database();
 
+private slots:
+    void on_buttons_rejected();
+    void on_buttons_accepted();
+
 private:
     Ui::Setup_Database *ui;
+
+    void closeEvent(QCloseEvent* event);
 };
 
 #endif // SETUP_DATABASE_H

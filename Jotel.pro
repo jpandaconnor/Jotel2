@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         jotel.cpp \
     crypto/simplecrypt.cpp \
-    setup/setup_database.cpp
+    setup/setup_database.cpp \
+    setup/setup_testconnection.cpp
 
 HEADERS += \
         jotel.h \
     crypto/simplecrypt.h \
-    setup/setup_database.h
+    setup/setup_database.h \
+    setup/setup_testconnection.h
 
 FORMS += \
         jotel.ui \

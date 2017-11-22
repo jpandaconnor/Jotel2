@@ -5,6 +5,9 @@
 
 #include "crypto/simplecrypt.h"
 
+// Database setup
+#include "setup/setup_database.h"
+
 #include <QCoreApplication>
 #include <QSettings>
 
@@ -30,6 +33,9 @@ Jotel::Jotel(QWidget *parent) :
     if(settings.value("database/host").toInt() == 0) {
         qDebug() << "Does not exist";
 
+        Setup_Database* database_setup = new Setup_Database();
+        database_setup->setModal(true);
+        database_setup->show();
 
         // There is nothing set up in here
     } else {
@@ -41,8 +47,8 @@ Jotel::Jotel(QWidget *parent) :
 
         // Decrypt down here
 
-        SimpleCrypt crypto(Q_UINT64_C(0x0c2ad4a4acb9f023));
-        QString result = crypto.encryptToString(testString);
+        // SimpleCrypt crypto(Q_UINT64_C(0x0c2ad4a4acb9f023));
+        // QString result = crypto.encryptToString(testString);
     }
 
     QSqlDatabase database = QSqlDatabase::addDatabase("QMYSQL", "jotel_connection");
