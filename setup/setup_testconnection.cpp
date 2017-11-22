@@ -2,12 +2,17 @@
 
 #include <QSqlDatabase>
 
+#include <QDebug>
+#include <QSqlError>
+
 Setup_TestConnection::Setup_TestConnection()
 {
 
 }
 
 bool Setup_TestConnection::areDetailsValid(QString address, QString dbname, QString username, QString password, int port) {
+    bool succ = false;
+
     QSqlDatabase database = QSqlDatabase::addDatabase("QMYSQL", "jotel_testconnection");
 
     database.setHostName(address);
@@ -16,11 +21,12 @@ bool Setup_TestConnection::areDetailsValid(QString address, QString dbname, QStr
     database.setPassword(password);
     database.setPort(port);
 
-    bool valid = false;
+    succ = database.open();
+    // database.close();
 
-    if(database.open()) {
-        valid = true;
-        database.close();
-    }
-    return valid;
+    qDebug() << database.lastError();
+
+    qDebug() << succ;
+
+    return succ;
 }

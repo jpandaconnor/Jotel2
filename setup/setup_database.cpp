@@ -95,7 +95,7 @@ void Setup_Database::validateInput() {
 
     Setup_TestConnection* test_connection = new Setup_TestConnection();
 
-    if(test_connection->areDetailsValid(ts_ip, ts_dbname, ts_user, ts_password, ui->portLineEdit->text().toInt())) {
+    if(test_connection->areDetailsValid(ts_ip, ts_dbname, ts_user, ts_password, ts_port)) {
         greyOut();
         QMessageBox::StandardButton info = QMessageBox::information(
                     this, "Connted", tr("Successfully conneted to the database"), QMessageBox::Ok);
@@ -106,7 +106,14 @@ void Setup_Database::validateInput() {
         test_connection = NULL;
 
         // Open the connection
+    } else {
+        greyIn();
+        QMessageBox::critical(this, "Database error",
+                              tr("Jotel could not connect to the database. Please check the details and try again"));
     }
+
+    delete test_connection;
+    test_connection = NULL;
 }
 
 // To stop users editing data whilst it attempts to connect to the databse
