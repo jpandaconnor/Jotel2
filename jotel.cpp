@@ -47,23 +47,31 @@ Jotel::Jotel(QWidget *parent) :
 
         // Decrypt down here
 
-        // SimpleCrypt crypto(Q_UINT64_C(0x0c2ad4a4acb9f023));
+        SimpleCrypt crypto(Q_UINT64_C(0x0c2ad4a4acb9f023));
+        QString raw_password = crypto.decryptToString(password);
+
         // QString result = crypto.encryptToString(testString);
     }
-
-    QSqlDatabase database = QSqlDatabase::addDatabase("QMYSQL", "jotel_connection");
-
-    database.setHostName("localhost");
-    database.setDatabaseName("jotel");
-    database.setUserName("root");
-    database.setPassword("teamo17october2014");
-    database.setPort(3306);
-
-    database.open();
 }
 
-void Jotel::connect_database() {
+bool Jotel::connect_database(QString hostname, QString database_name, QString username, QString password, int port) {
+    QSqlDatabase database = QSqlDatabase::addDatabase("QMYSQL");
 
+    // Set all the database details in here
+    database.setHostName(hostname);
+    database.setDatabaseName(database_name);
+    database.setUserName(username);
+    database.setPassword(password);
+    database.setPort(port);
+
+    // Store whether it's opened or not
+    bool succ = database.open();
+
+    // Ifit's worked just close it
+    if(database.isOpen()) {
+        database.close();
+    }
+    return succ;
 }
 
 Jotel::~Jotel()

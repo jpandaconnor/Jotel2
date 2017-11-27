@@ -15,7 +15,7 @@ class Jotel : public QMainWindow
 public:
     explicit Jotel(QWidget *parent = 0);
 
-    static void connect_database();
+    static bool connect_database(QString hostname, QString database_name, QString username, QString password, int port);
 
     ~Jotel();
 

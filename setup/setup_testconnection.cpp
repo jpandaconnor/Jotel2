@@ -24,11 +24,7 @@ bool Setup_TestConnection::areDetailsValid(QString address, QString dbname, QStr
     database.setPort(port);
 
     succ = database.open();
-    // database.close();
-
-    // qDebug() << database.lastError();
-
-    qDebug() << succ;
+    database.close();
 
     return succ;
 }
