@@ -13,7 +13,9 @@ Setup_TestConnection::Setup_TestConnection()
 bool Setup_TestConnection::areDetailsValid(QString address, QString dbname, QString username, QString password, int port) {
     bool succ = false;
 
-    QSqlDatabase database = QSqlDatabase::addDatabase("QMYSQL", "jotel_testconnection");
+    QSqlDatabase::addDatabase("QMYSQL");
+
+    QSqlDatabase database = QSqlDatabase::database();
 
     database.setHostName(address);
     database.setDatabaseName(dbname);
@@ -24,7 +26,7 @@ bool Setup_TestConnection::areDetailsValid(QString address, QString dbname, QStr
     succ = database.open();
     // database.close();
 
-    qDebug() << database.lastError();
+    // qDebug() << database.lastError();
 
     qDebug() << succ;
 
